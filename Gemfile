@@ -40,6 +40,11 @@ group :development, :test do
   gem "brakeman", require: false
 
   gem "rubocop-rails-omakase", require: false
+
+  gem "rspec_junit_formatter"
+  gem "rspec-rails"
+  gem "factory_bot_rails", "~> 6.2"
+  gem "faker", "~> 2.18"
 end
 
 group :development do
@@ -49,4 +54,6 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem "shoulda-matchers", "~> 5.0"
+  gem "database_cleaner-active_record"
 end
