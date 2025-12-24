@@ -3,14 +3,26 @@ require 'rails_helper'
 RSpec.describe Profile, type: :model do
   subject { build(:profile) }
 
-  describe 'validations' do
-    it { should validate_presence_of(:username) }
-    it { should validate_uniqueness_of(:username) }
-    it { should validate_presence_of(:avatar_url) }
+  describe "associations" do
+    it { should have_one(:profile_stat).dependent(:destroy) }
+    it { should have_one(:short_url).dependent(:destroy) }
+  end
 
-    it { should validate_numericality_of(:followers_count).is_greater_than_or_equal_to(0) }
-    it { should validate_numericality_of(:following_count).is_greater_than_or_equal_to(0) }
-    it { should validate_numericality_of(:stars_count).is_greater_than_or_equal_to(0) }
-    it { should validate_numericality_of(:contributions_last_year).is_greater_than_or_equal_to(0) }
+   describe "validations" do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:github_username) }
+    it { should validate_presence_of(:github_url) }
+
+    it do
+      create(:profile)
+      should validate_uniqueness_of(:github_username)
+    end
+  end
+
+  describe "callbacks" do
+    it "creates profile_stat after creation" do
+      profile = create(:profile)
+      expect(profile.profile_stat).to be_present
+    end
   end
 end

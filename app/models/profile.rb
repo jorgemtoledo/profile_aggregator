@@ -1,12 +1,10 @@
-class Profile < ApplicationRecord
-  has_one :short_url, dependent: :destroy
-  
-  validates :username, presence: true, uniqueness: true
-  validates :avatar_url, presence: true
+# frozen_string_literal: true
 
-  validates :followers_count,
-            :following_count,
-            :stars_count,
-            :contributions_last_year,
-            numericality: { greater_than_or_equal_to: 0 }
+class Profile < ApplicationRecord
+  has_one :profile_stat, dependent: :destroy
+  has_one :short_url, dependent: :destroy
+
+  validates :name, presence: true
+  validates :github_username, presence: true, uniqueness: true
+  validates :github_url, presence: true
 end
