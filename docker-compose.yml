@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   web:
     build:
@@ -7,7 +5,7 @@ services:
       dockerfile: Dockerfile.dev
     container_name: profile_aggregator_web
     volumes:
-      - .:/rails
+      - .:/rails-app
       - bundle_data:/usr/local/bundle
     ports:
       - "3000:3000"
@@ -19,8 +17,8 @@ services:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       BUNDLE_WITHOUT: ""
-    entrypoint: ["/rails/bin/docker-entrypoint"]
-    command: ["./bin/rails", "server", "-b", "0.0.0.0"]
+    entrypoint: ["/rails-app/bin/docker-entrypoint"]
+    command: ["bin/rails", "server", "-b", "0.0.0.0"]
     depends_on:
       postgres:
         condition: service_started
@@ -55,7 +53,7 @@ services:
       dockerfile: Dockerfile.dev
     container_name: profile_aggregator_test
     volumes:
-      - .:/rails
+      - .:/rails-app
       - bundle_data:/usr/local/bundle
     env_file:
       - .env

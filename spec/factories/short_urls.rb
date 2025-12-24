@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :short_url do
-    association :profile
-    code { SecureRandom.alphanumeric(8) }
+    profile
+    code { SecureRandom.alphanumeric(6) }
+    target_url { "https://github.com/octocat" }
   end
 end
