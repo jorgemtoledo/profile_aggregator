@@ -1,0 +1,41 @@
+<section class="pb-5">
+  <div class="container">
+    <ul class="list-group">
+        <% @profiles.each do |profile| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong><%= profile.name %></strong><br>
+              <% if profile.short_url %>
+                <small class="text-muted">
+                  URL: 
+                  <%= link_to profile.short_url_value,
+                        profile.short_url_value,
+                        target: "_blank" %>
+                </small>
+              <% else %>
+                <small class="text-muted">URL não gerada</small>
+              <% end %>            
+            </div>
+            <div class="btn-group">
+              <%= link_to "Ver", profile_path(profile),
+                    class: "btn btn-sm btn-outline-primary" %>
+
+              <button
+                class="btn btn-sm btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#editProfileModal-<%= profile.id %>">
+                Editar
+              </button>
+
+              <%= render "profiles/modal_form",
+                  profile: profile,
+                  modal_id: "editProfileModal-#{profile.id}",
+                  title: "Editar",
+                  submit_label: "Salvar alterações" %>
+              
+            </div>
+          </li>
+        <% end %>
+      </ul>
+  </div>
+</section>

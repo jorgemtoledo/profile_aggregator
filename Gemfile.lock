@@ -107,6 +107,8 @@ GEM
       bigdecimal
       rexml
     crass (1.0.6)
+    cssbundling-rails (1.4.3)
+      railties (>= 6.0.0)
     csv (3.3.5)
     database_cleaner-active_record (2.2.2)
       activerecord (>= 5.a)
@@ -469,6 +471,7 @@ DEPENDENCIES
   brakeman
   bundler-audit
   capybara
+  cssbundling-rails (~> 1.4)
   database_cleaner-active_record
   debug
   dotenv-rails

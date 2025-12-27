@@ -1,0 +1,129 @@
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-lg">
+          <img
+            src="<%= @profile.profile_stat.avatar_url %>"
+            class="card-img-top"
+            alt="<%= @profile.name %>"
+          >
+
+          <div class="card-body text-center">
+            <h3 class="card-title"><%= @profile.name %></h3>
+
+            <p class="text-muted">
+              @<%= @profile.github_username %>
+            </p>
+
+            <% stats = @profile.profile_stat %>
+
+            <% if stats.present? %>
+              <p class="my-3 d-flex justify-content-center gap-4">
+
+                <span
+                  data-bs-toggle="tooltip"
+                  title="Total de estrelas recebidas nos repositórios"
+                >
+                  ⭐ <%= human_number(stats.stars_count) %>
+                  <small class="text-muted">Stars</small>
+                </span>
+
+                <span
+                  data-bs-toggle="tooltip"
+                  title="Número de pessoas que seguem este usuário"
+                >
+                  👥 <%= human_number(stats.followers_count) %>
+                  <small class="text-muted">Followers</small>
+                </span>
+
+                <span
+                  data-bs-toggle="tooltip"
+                  title="Número de pessoas que o usuário segue"
+                >
+                  ➕ <%= human_number(stats.following_count) %>
+                  <small class="text-muted">Following</small>
+                </span>
+
+                <span
+                  data-bs-toggle="tooltip"
+                  title="Total de contribuições no GitHub nos últimos 12 meses"
+                >
+                  🟩 <%= human_number(stats.contributions_last_year) %>
+                  <small class="text-muted">Contributions (12m)</small>
+                </span>
+
+              </p>
+            <% else %>
+              <p class="text-muted">Estatísticas indisponíveis</p>
+            <% end %>           
+
+            <% if @profile.profile_stat.location.present? %>
+              <p class="text-muted">
+                📍 <%= @profile.profile_stat.location %>
+              </p>
+            <% end %>
+
+            <% if @profile.profile_stat.organization.present? %>
+              <p class="text-muted">
+                🏢 <%= @profile.profile_stat.organization %>
+              </p>
+            <% end %>
+
+            <a
+              href="<%= @profile.github_url %>"
+              target="_blank"
+              class="btn btn-outline-dark btn-sm mt-3"
+            >
+              Ver no GitHub
+            </a>
+          </div>
+
+          <div class="card-footer bg-white d-flex justify-content-between">
+            <%= link_to root_path,
+                  class: "btn btn-sm btn-outline-secondary",
+                  data: { bs_toggle: "tooltip" },
+                  title: "Voltar para a lista" do %>
+              <i class="bi bi-arrow-left"></i>
+            <% end %>
+
+            <%= button_to rescan_profile_path(@profile),
+                  method: :post,
+                  class: "btn btn-sm btn-outline-success",
+                  data: { bs_toggle: "tooltip" },
+                  title: "Re-escanear dados do GitHub" do %>
+              <i class="bi bi-arrow-clockwise"></i>
+            <% end %>
+
+            <button
+              class="btn btn-sm btn-outline-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#editProfileModal-<%= @profile.id %>"
+              data-bs-toggle="tooltip"
+              title="Editar nome e URL do GitHub">
+              <i class="bi bi-pencil"></i>
+            </button>
+            
+            <%= link_to profile_path(@profile),
+                  data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Tem certeza que deseja remover este perfil?",
+                    bs_toggle: "tooltip"
+                  },
+                  title: "Remover perfil",
+                  class: "btn btn-sm btn-outline-danger" do %>
+              <i class="bi bi-trash"></i>
+            <% end %>
+          </div>
+
+          <%= render "profiles/modal_form",
+                profile: @profile,
+                modal_id: "editProfileModal-#{@profile.id}",
+                title: "Editar perfil",
+                submit_label: "Salvar alterações" %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
