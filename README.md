@@ -238,7 +238,7 @@ docker compose exec web bundle exec rspec spec/services/github/profile_importer_
   - Testes garantem segurança para re-scan e updates
 
 ## 🔗 Link do projeto
-- Acesse em: [http://localhost:3000](http://localhost:3000)
+- Acesse em: [https://profile-aggregator.onrender.com]([https://profile-aggregator.onrender.com)
 
 ---
 
