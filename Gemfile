@@ -30,7 +30,7 @@ gem "image_processing", "~> 1.2"
 gem "faraday"
 gem "dotenv-rails"
 
-gem "cssbundling-rails", "~> 1.4"
+# gem "cssbundling-rails", "~> 1.4"
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "bundler-audit", require: false
