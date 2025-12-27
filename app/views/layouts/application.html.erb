@@ -1,29 +1,48 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Profile Aggregator" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Profile Aggregator">
-    <meta name="mobile-web-app-capable" content="yes">
+    <title>Profile Aggregator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= javascript_importmap_tags %>    
 
-    <%= yield :head %>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    >
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-dark text-light d-flex flex-column min-vh-100">
+    <%= render "shared/navbar" %>
+
+    <main class="flex-fill bg-white text-dark pt-5" style="padding-top: 80px;">
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </main>
+
+    <%= render "profiles/modal_form",
+      modal_id: "profileModal",
+      title: "Cadastrar perfil do GitHub",
+      submit_label: "Salvar",
+      profile: @profile
+    %>
+
+    <%= render "shared/footer" %>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script>
+      document.addEventListener("turbo:load", () => {
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el))
+      })
+    </script>
   </body>
 </html>

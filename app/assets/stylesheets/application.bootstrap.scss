@@ -1,0 +1,41 @@
+@import "bootstrap";
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+.main-content {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+/* Navbar custom */
+.navbar-custom {
+  background-color: #0052cc;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  color: #ffffff;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #d2e3ff;
+}
+
+/* Footer custom */
+.footer-custom {
+  background-color: #d2e3ff;
+  color: #003a8c;
+}
+
+.footer-custom a {
+  color: #003a8c;
+  text-decoration: none;
+}
+
+.footer-custom a:hover {
+  text-decoration: underline;
+}
+
+.modal-content {
+  background-color: #fff;
+}

@@ -1,0 +1,21 @@
+<section class="py-5 text-center">
+  <div class="container">
+    <h1 class="fw-bold">GitHub Profile Aggregator</h1>
+    <p class="lead text-muted mb-4">
+      Busque perfis do GitHub, visualize estatísticas e gere URLs encurtadas.
+    </p>
+
+    <%= form_with url: root_path, method: :get, local: true, class: "row justify-content-center" do |f| %>
+      <div class="col-md-10">
+        <div class="input-group">
+          <%= f.text_field :q,
+                class: "form-control",
+                placeholder: "Buscar por nome, username, organização ou localização" %>
+          <button class="btn btn-primary">
+            🔍
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

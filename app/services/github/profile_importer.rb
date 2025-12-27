@@ -2,11 +2,14 @@
 
 module Github
   class ProfileImporter
-    def initialize(username)
+    def initialize(username, github_url)
       @username = username
+      @github_url = github_url
     end
 
     def call
+      Github::ProfileValidator.new(@username, @github_url).call
+
       profile_data = profile_scraper.call
       contributions = contributions_scraper.call
 
